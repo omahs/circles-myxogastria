@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
   avatarContainer: {
     position: 'relative',
     margin: '0 auto',
+    cursor: 'pointer',
   },
   organizationIndicator: {
     position: 'absolute',
@@ -29,14 +30,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Avatar = ({ address, size = 'small', url, ...props }) => {
+const Avatar = ({ address, size = 'small', url, useCache, ...props }) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  let { avatarUrl, username } = useUserdata(address);
-  if (!avatarUrl && url) {
-    avatarUrl = url;
-  }
+  let { avatarUrl, username } = useUserdata(address, useCache);
+
+  if (url) avatarUrl = url;
 
   const { isOrganization } = useIsOrganization(address);
 
@@ -73,6 +73,7 @@ Avatar.propTypes = {
   address: PropTypes.string,
   size: PropTypes.string,
   url: PropTypes.string,
+  useCache: PropTypes.bool,
 };
 
 export default React.memo(Avatar);

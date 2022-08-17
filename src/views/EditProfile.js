@@ -1,7 +1,6 @@
 import {
   Badge,
   Box,
-  CircularProgress,
   Container,
   IconButton,
   Typography,
@@ -17,22 +16,18 @@ import { DASHBOARD_PATH } from '~/routes';
 
 import Avatar from '~/components/Avatar';
 import Button from '~/components/Button';
-import ButtonClose from '~/components/ButtonClose';
 import CenteredHeading from '~/components/CenteredHeading';
 import DialogInfo from '~/components/DialogInfo';
 import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import UploadFromCamera from '~/components/UploadFromCamera';
-import VerifiedEmailInput from '~/components/VerifiedEmailInput';
 import VerifiedUsernameInput from '~/components/VerifiedUsernameInput';
 import View from '~/components/View';
 import { useUserdata } from '~/hooks/username';
 import core from '~/services/core';
 import translate from '~/services/locale';
-import web3 from '~/services/web3';
 import notify, { NotificationsTypes } from '~/store/notifications/actions';
 import { IconUploadPhoto } from '~/styles/icons';
-import { getDeviceDetect } from '~/utils/deviceDetect';
 
 const IMAGE_FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const BOTTOM_SPACING = '30px';
@@ -66,12 +61,15 @@ const useStyles = makeStyles((theme) => ({
   actionButtonsContainer: {
     marginBottom: BOTTOM_SPACING,
   },
-  circularProgressContainer: {
-    marginBottom: BOTTOM_SPACING,
-  },
   usernameInputContainer: {
     marginBottom: BOTTOM_SPACING,
     marginTop: '50px',
+  },
+  openCameraInput: {
+    display: 'none',
+  },
+  saveButton: {
+    marginBottom: '20px',
   },
 }));
 
@@ -112,7 +110,7 @@ const DialogContentUpload = ({ onFileUpload, handleClose, uploadImgSrc }) => {
       }, new FormData());
     } else {
       data = new FormData();
-      data.append('file', files);
+      data.append('files', files);
     }
 
     try {
@@ -132,6 +130,7 @@ const DialogContentUpload = ({ onFileUpload, handleClose, uploadImgSrc }) => {
         }),
       );
     }
+
     setIsLoading(false);
   }
 
@@ -150,35 +149,33 @@ const DialogContentUpload = ({ onFileUpload, handleClose, uploadImgSrc }) => {
 
   return (
     <Box className={classes.dialogContentContainer}>
-      <Box className={classes.actionButtonsContainer}>
-        {isLoading ? (
-          <Box className={classes.circularProgressContainer}>
-            <CircularProgress />
-          </Box>
-        ) : (
-          <>
-            <Button
-              className={classes.continueButton}
-              fullWidth
-              isOutline
-              isWhite
-              onClick={galleryBtnHandler}
-            >
-              {translate('EditProfile.optionFile')}
-            </Button>
-            <input
-              accept={fileTypesStr}
-              ref={fileInputElem}
-              style={{ display: 'none' }}
-              type="file"
-              onChange={uploadFile}
-            />
-          </>
-        )}
-        <Button fullWidth isOutline isWhite onClick={cameraBtnHandler}>
-          {translate('EditProfile.optionCamera')}
-        </Button>
-      </Box>
+      {!isUploadFromCamera && (
+        <>
+          <Button
+            className={classes.continueButton}
+            fullWidth
+            isOutline
+            isWhite
+            onClick={galleryBtnHandler}
+          >
+            {translate('EditProfile.optionFile')}
+          </Button>
+          <input
+            accept={fileTypesStr}
+            ref={fileInputElem}
+            style={{ display: 'none' }}
+            type="file"
+            onChange={uploadFile}
+          />
+        </>
+      )}
+      {!isUploadFromCamera && (
+        <Box className={classes.actionButtonsContainer}>
+          <Button fullWidth isOutline isWhite onClick={cameraBtnHandler}>
+            {translate('EditProfile.optionCamera')}
+          </Button>
+        </Box>
+      )}
       {isUploadFromCamera && (
         <UploadFromCamera
           imageCaptureError={onImageCaptureErrorHandler}
@@ -198,45 +195,48 @@ const EditProfile = () => {
   const [isOpenDialogCloseInfo, setIsOpenDialogCloseInfo] = useState(false);
   const [isOpenDialogUploadInfo, setIsOpenDialogUploadInfo] = useState(false);
   const [usernameInput, setUsernameInput] = useState(username);
-  const [emailInput, setEmailInput] = useState('email');
   const [profilePicUrl, setProfilePicUrl] = useState('');
   const dispatch = useDispatch();
-  const deviceDetect = getDeviceDetect();
 
   const safe = useSelector((state) => state.safe);
   const { username } = useUserdata(safe.currentAccount);
-
-  const onCloseBtnHandler = () => {
-    setIsOpenDialogCloseInfo(true);
-  };
 
   const onChangeUsernameHandler = (username) => {
     setUsernameInput(username);
   };
 
-  const onChangeEmailHandler = (email) => {
-    setEmailInput(email);
-  };
-
   const onDisabledChange = (updatedValue) => {
-    setIsDisabled(updatedValue);
+    if (username !== usernameInput) {
+      setIsDisabled(updatedValue);
+    } else {
+      setIsDisabled(false);
+    }
   };
 
   const saveChangesHandler = async () => {
-    // const test = await core.safe.getAddresses(safe.currentAccount);
-    // console.log('test', test);
+    editUserData();
+  };
 
+  async function editUserData() {
     try {
-      const result = await core.user.update({
-        safeAddress: test,
-        username: usernameInput,
-        email: emailInput,
-        avatarUrl: 'https://picsum.photos/200/300',
-        // avatarUrl: profilePicUrl,
-      });
-      console.log('result', result);
+      const userEmail = await core.user.getEmail(safe.currentAccount);
+      const result = await core.user.update(
+        safe.currentAccount,
+        usernameInput,
+        userEmail,
+        profilePicUrl,
+      );
+
+      if (result) {
+        dispatch(
+          notify({
+            text: translate('EditProfile.confirmationMessage'),
+            type: NotificationsTypes.SUCCESS,
+          }),
+        );
+        setIsClose(true);
+      }
     } catch (error) {
-      console.log('error', error);
       dispatch(
         notify({
           text: translate('EditProfile.errorSaveChanges'),
@@ -244,6 +244,10 @@ const EditProfile = () => {
         }),
       );
     }
+  }
+
+  const dialogOpenInfoHandler = () => {
+    setIsOpenDialogCloseInfo(true);
   };
 
   const dialogCloseInfoHandler = () => {
@@ -264,6 +268,9 @@ const EditProfile = () => {
 
   const dialogContentClose = (
     <Box className={classes.dialogContentContainer}>
+      <Typography className="lightGreyText">
+        {translate('EditProfile.bodyCancel')}
+      </Typography>
       <Button
         className={classes.continueButton}
         fullWidth
@@ -272,7 +279,7 @@ const EditProfile = () => {
       >
         {translate('EditProfile.buttonContinue')}
       </Button>
-      <Button fullWidth isOutline isWhite onClick={dialogCloseInfoHandler}>
+      <Button fullWidth isWithoutBorder onClick={dialogCloseInfoHandler}>
         {translate('EditProfile.buttonCancel')}
       </Button>
     </Box>
@@ -285,7 +292,6 @@ const EditProfile = () => {
   return (
     <>
       <Header>
-        <ButtonClose onClick={onCloseBtnHandler}></ButtonClose>
         <CenteredHeading>{translate('EditProfile.heading')}</CenteredHeading>
       </Header>
       <View>
@@ -294,10 +300,10 @@ const EditProfile = () => {
             dialogContent={dialogContentClose}
             fullWidth
             handleClose={() => setIsOpenDialogCloseInfo(false)}
-            id="dialogContentClose"
+            isBtnClose={false}
             isOpen={isOpenDialogCloseInfo}
             maxWidth={'xs'}
-            title={translate('EditProfile.bodyCancel')}
+            title={translate('EditProfile.titleCancel')}
           />
           <DialogInfo
             className={classes.dialogUploadContainer}
@@ -310,7 +316,6 @@ const EditProfile = () => {
             }
             fullWidth
             handleClose={() => setIsOpenDialogUploadInfo(false)}
-            id="dialogUpload"
             isOpen={isOpenDialogUploadInfo}
             maxWidth={'xs'}
           />
@@ -334,17 +339,11 @@ const EditProfile = () => {
           </Box>
           <Box className={classes.usernameInputContainer}>
             <VerifiedUsernameInput
+              address={safe.currentAccount || safe.pendingAddress}
+              allowCurrentUser
               label={translate('Onboarding.formUsername')}
               value={usernameInput}
               onChange={onChangeUsernameHandler}
-              onStatusChange={onDisabledChange}
-            />
-          </Box>
-          <Box>
-            <VerifiedEmailInput
-              label={translate('Onboarding.formEmail')}
-              value={emailInput}
-              onChange={onChangeEmailHandler}
               onStatusChange={onDisabledChange}
             />
           </Box>
@@ -360,12 +359,16 @@ const EditProfile = () => {
       </View>
       <Footer>
         <Button
+          className={classes.saveButton}
           disabled={isDisabled}
           fullWidth
           isPrimary
           onClick={saveChangesHandler}
         >
           {translate('EditProfile.buttonSave')}
+        </Button>
+        <Button fullWidth isWithoutBorder onClick={dialogOpenInfoHandler}>
+          {translate('EditProfile.buttonCancel')}
         </Button>
       </Footer>
     </>
