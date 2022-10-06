@@ -243,6 +243,7 @@ const EditProfile = () => {
   const [emailValid, setEmailValid] = useState(false);
   const [privacy, setPrivacy] = useState(true);
   const [terms, setTerms] = useState(true);
+
   const [informationText, setInformationText] = useState(
     translate('EditProfile.informationText'),
   );
@@ -250,6 +251,7 @@ const EditProfile = () => {
   const dispatch = useDispatch();
 
   const safe = useSelector((state) => state.safe);
+  const isOrganization = safe?.isOrganization;
   const { username } = useUserdata(safe.currentAccount);
 
   const onChangeUsernameHandler = (username) => {
@@ -458,6 +460,7 @@ const EditProfile = () => {
             <VerifiedUsernameInput
               address={safe.currentAccount || safe.pendingAddress}
               allowCurrentUser
+              isOrganization={isOrganization}
               label={translate('Onboarding.formUsername')}
               value={usernameInput}
               onBlur={onUsernameInputBlurHandler}
@@ -468,6 +471,7 @@ const EditProfile = () => {
           </Box>
           <Box className={classes.emailInputContainer}>
             <VerifiedEmailInput
+              isOrganization={isOrganization}
               label={translate('Onboarding.formEmail')}
               value={emailInput}
               onBlur={onEmailInputBlurHandler}
