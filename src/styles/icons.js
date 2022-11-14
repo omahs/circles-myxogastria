@@ -17,6 +17,7 @@ import friends from '%/images/friends.svg';
 import mail from '%/images/mail.svg';
 import members from '%/images/members.svg';
 import menu from '%/images/menu.svg';
+import more from '%/images/more.svg';
 import notification from '%/images/notification.svg';
 import plus from '%/images/plus.svg';
 import qrLarge from '%/images/qr-large.svg';
@@ -47,7 +48,7 @@ export const IconAlert = (props) => {
 };
 
 export const IconBack = (props) => {
-  return <SvgIcon component={arrow} {...props} viewBox="0 0 12 18" />;
+  return <SvgIcon component={arrow} {...props} viewBox="0 0 25 25" />;
 };
 
 export const IconCheck = (props) => {
@@ -59,7 +60,7 @@ export const IconCircles = (props) => {
 };
 
 export const IconClose = (props) => {
-  return <SvgIcon component={close} {...props} viewBox="0 0 20 20" />;
+  return <SvgIcon component={close} {...props} viewBox="0 0 25 25" />;
 };
 
 export const IconCloseOutline = (props) => {
@@ -95,11 +96,15 @@ export const IconMembers = (props) => {
 };
 
 export const IconMenu = (props) => {
-  return <SvgIcon component={menu} {...props} />;
+  return <SvgIcon component={menu} {...props} viewBox="0 0 24 25" />;
+};
+
+export const IconMore = (props) => {
+  return <SvgIcon component={more} {...props} viewBox="0 0 25 25" />;
 };
 
 export const IconNotification = (props) => {
-  return <SvgIcon component={notification} {...props} viewBox="0 0 29 34" />;
+  return <SvgIcon component={notification} {...props} viewBox="0 0 24 27" />;
 };
 
 export const IconPlus = (props) => {
@@ -115,7 +120,7 @@ export const IconQRLarge = (props) => {
 };
 
 export const IconScan = (props) => {
-  return <SvgIcon component={scan} {...props} viewBox="0 0 21 21" />;
+  return <SvgIcon component={scan} {...props} viewBox="0 0 25 25" />;
 };
 
 export const IconSearch = (props) => {
@@ -127,7 +132,7 @@ export const IconSend = (props) => {
 };
 
 export const IconShare = (props) => {
-  return <SvgIcon component={share} {...props} viewBox="0 0 26 28" />;
+  return <SvgIcon component={share} {...props} viewBox="0 0 25 25" />;
 };
 
 export const IconTelegram = (props) => {
