@@ -22,7 +22,7 @@ import { generatePath, useHistory } from 'react-router-dom';
 
 import { SEARCH_PATH } from '~/routes';
 
-import TourWebOfTrustSVG from '%/images/tour-web-of-trust.svg';
+import TourWebOfTrustSVG from '%/images/web-of-trust.svg';
 import Button from '~/components/Button';
 import ProfileMini from '~/components/ProfileMini';
 import TabNavigation from '~/components/TabNavigation';
