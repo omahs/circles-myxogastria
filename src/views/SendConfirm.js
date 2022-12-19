@@ -234,7 +234,7 @@ const SendConfirm = () => {
             {paymentNote}
           </Typography>
           <Box maxWidth="60%" mb={1} mt={2} mx="auto">
-            <Button autoFocus fullWidth isPrimary onClick={handleSend}>
+            <Button autoFocus fullWidth onClick={handleSend}>
               {translate('SendConfirm.dialogSendConfirm')}
             </Button>
           </Box>
@@ -314,7 +314,6 @@ const SendConfirm = () => {
             amount === '' || isPaymentNoteInvalid || !amount || amount <= 0
           }
           fullWidth
-          isPrimary
           onClick={handleConfirmOpen}
         >
           {translate('SendConfirm.buttonSubmitAmount')}

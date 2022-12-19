@@ -142,12 +142,7 @@ const Login = () => {
       </View>
       <Footer>
         <AppNote messageVersion="login" />
-        <Button
-          disabled={!isValid}
-          fullWidth
-          isPrimary
-          onClick={handleSubmitSeedPhrase}
-        >
+        <Button disabled={!isValid} fullWidth onClick={handleSubmitSeedPhrase}>
           {translate('Login.buttonSubmit')}
         </Button>
       </Footer>
