@@ -49,6 +49,7 @@ export const colors = {
   silverTree: 'rgba(112, 189, 158, 0.40)',
   finn: 'rgba(90, 47, 86, 0.3)',
   fountainBlue: '#48B2B7',
+  fountainBlueLighter: '#6CC1C5',
   springGreen: '#06FC9D',
   pizazz: '#FF8E00',
   ceriseRed: '#D12D5F',
@@ -59,6 +60,9 @@ export const colors = {
   tapestry: '#A75183',
   greyHover: 'rgba(222, 213, 221, 0.8)',
   cornflowerBlue: '#efeaef80',
+  oldLavender: '#7B5978',
+  cannonPink: '#853F5C',
+  cranberry: '#D64B85',
 };
 
 const gradients = {
@@ -67,6 +71,8 @@ const gradients = {
   grayDark:
     'linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(284.04deg, rgba(0, 0, 0, 0.49) 0%, rgba(0, 0, 0, 0.12) 100%);',
   purple: `linear-gradient(280deg, ${colors.purpleDark} 0%, ${colors.purple} 100%)`,
+  pinkToPurple: `linear-gradient(284.04deg, ${colors.purpleDark} 0%, ${colors.purple} 100%)`,
+  lightPinkToPurple: `linear-gradient(284.04deg, ${colors.cannonPink} 0%, ${colors.cranberry} 100%)`,
   error: `linear-gradient(90deg, ${colors.purpleDark}, ${colors.purple} 100%)`,
   info: `linear-gradient(90deg, ${colors.blue} 0%, ${colors.purpleLight} 100%)`,
   success: `linear-gradient(90deg, ${colors.green} 0%, ${colors.blue} 100%)`,

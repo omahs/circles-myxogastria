@@ -89,6 +89,11 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: `2px solid ${theme.palette.primary.main}`,
     },
   },
+  iconTrustActice: {
+    '& path': {
+      fill: 'inherit',
+    },
+  },
 }));
 
 const Finder = ({
@@ -346,6 +351,8 @@ const FinderSearchBar = ({
 };
 
 const FinderFilter = ({ filterResults, selectedFilter, onChange }) => {
+  const classes = useStyles();
+
   return (
     <TabNavigation
       value={selectedFilter}
@@ -360,7 +367,7 @@ const FinderFilter = ({ filterResults, selectedFilter, onChange }) => {
             color="primary"
             overlap="rectangular"
           >
-            <IconTrustActive />
+            <IconTrustActive className={classes.iconTrustActice} />
           </Badge>
         }
         label={translate('Finder.bodyFilterDirect')}
