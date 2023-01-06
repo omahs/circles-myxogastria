@@ -196,3 +196,86 @@ export const IconUploadPhoto = (props) => {
 export const IconWorld = (props) => {
   return <SvgIcon component={world} {...props} viewBox="0 0 20 20" />;
 };
+
+export const iconSelector = (icon) => {
+  switch (icon) {
+    case 'IconActivity':
+      return IconActivity;
+    case 'IconAdd':
+      return IconAdd;
+    case 'IconAlert':
+      return IconAlert;
+    case 'IconBack':
+      return IconBack;
+    case 'IconBrowser':
+      return IconBrowser;
+    case 'IconCheck':
+      return IconCheck;
+    case 'IconCircles':
+      return IconCircles;
+    case 'IconClose':
+      return IconClose;
+    case 'IconCloseOutline':
+      return IconCloseOutline;
+    case 'IconConnections':
+      return IconConnections;
+    case 'IconCrossInCircle':
+      return IconCrossInCircle;
+    case 'IconFacebook':
+      return IconFacebook;
+    case 'IconEdit':
+      return IconEdit;
+    case 'IconFollow':
+      return IconFollow;
+    case 'IconFriends':
+      return IconFriends;
+    case 'IconMail':
+      return IconMail;
+    case 'IconMembers':
+      return IconMembers;
+    case 'IconMenu':
+      return IconMenu;
+    case 'IconNotification':
+      return IconNotification;
+    case 'IconOffline':
+      return IconOffline;
+    case 'IconOkTick':
+      return IconOkTick;
+    case 'IconPartySuccess':
+      return IconPartySuccess;
+    case 'IconPlus':
+      return IconPlus;
+    case 'IconRefresh':
+      return IconRefresh;
+    case 'IconQR':
+      return IconQR;
+    case 'IconQRLarge':
+      return IconQRLarge;
+    case 'IconScan':
+      return IconScan;
+    case 'IconSearch':
+      return IconSearch;
+    case 'IconSend':
+      return IconSend;
+    case 'IconShare':
+      return IconShare;
+    case 'IconTelegram':
+      return IconTelegram;
+    case 'IconTransactions':
+      return IconTransactions;
+    case 'IconTriangleWarning':
+      return IconTriangleWarning;
+    case 'IconTrustActive':
+      return IconTrustActive;
+    case 'IconTrustMutual':
+      return IconTrustMutual;
+    case 'IconTwitter':
+      return IconTwitter;
+    case 'IconUploadPhoto':
+      return IconUploadPhoto;
+    case 'IconWorld':
+      return IconWorld;
+    default:
+      return IconAlert;
+  }
+};
