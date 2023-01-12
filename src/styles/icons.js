@@ -78,7 +78,7 @@ export const IconCloseOutline = (props) => {
 };
 
 export const IconCrossInCircle = (props) => {
-  return <SvgIcon component={crossInCircle} {...props} viewBox="0 0 25 25" />;
+  return <SvgIcon component={crossInCircle} {...props} viewBox="0 0 17 17" />;
 };
 
 export const IconConnections = (props) => {
