@@ -304,7 +304,7 @@
     "notificationError": "Could not open QR code scanner: {error}."
   },
   "QRGenerator": {
-    "bodyPaymentNoteInvalid": "You cannot write special symbols like {}<>^ and more than 100 characters.",
+    "bodyPaymentNoteInvalid": "You cannot write special symbols like {}<br>^ and more than 100 characters.",
     "buttonShowQRCode": "Show QR Code",
     "dialogClose": "Close",
     "dialogSaveFile": "Save as .png file",
@@ -332,7 +332,7 @@
       "zero": "You can currently not send anything to @{username} which means that there is no trust path between you."
     },
     "bodyMaxFlow": "Maximum amount: {amount}",
-    "bodyPaymentNoteInvalid": "You cannot write special symbols like {}<>^ and more than 100 characters.",
+    "bodyPaymentNoteInvalid": "You cannot write special symbols like {}<br>^ and more than 100 characters.",
     "buttonSubmitAmount": "Send",
     "dialogSendCancel": "Cancel",
     "dialogSendConfirm": "Confirm",
@@ -349,6 +349,7 @@
     "formSender": "Sent from",
     "headingSendCircles": "Send Circles",
     "successMessage": "<strong>{amount}circles</strong> sent to @{username}!",
+    "receiveSuccessMessage": "You received <strong>{amount}circles</strong> from <br> @{username}.",
     "tooltipMaxFlow": "This is the current maximum amount of Circles you can send in the trust network to @{username}"
   },
   "Settings": {
@@ -399,7 +400,7 @@
     "slideHeading3": "Share Trust"
   },
   "UBI": {
-    "infoUbiPayoutReceived": "You just received your UBI of <strong>{payout}circles</strong> for the month!"
+    "infoUbiPayoutReceived": "You just received your UBI of <br><strong>{payout}circles</strong> for the month!"
   },
   "Validation": {
     "bodyDoNotReset": "Do not reset your browser local storage or you will need to recover your data with your seed phrase.",
