@@ -5,6 +5,7 @@ import activity from '%/images/activity.svg';
 import add from '%/images/add.svg';
 import alert from '%/images/alert.svg';
 import arrow from '%/images/arrow.svg';
+import bellRing from '%/images/bell-ring.svg';
 import browser from '%/images/browser.svg';
 import check from '%/images/check.svg';
 import circles from '%/images/circles.svg';
@@ -27,6 +28,7 @@ import plus from '%/images/plus.svg';
 import qrLarge from '%/images/qr-large.svg';
 import qr from '%/images/qr.svg';
 import refresh from '%/images/refresh.svg';
+import reload from '%/images/reload.svg';
 import scan from '%/images/scan.svg';
 import search from '%/images/search.svg';
 import send from '%/images/send.svg';
@@ -61,6 +63,10 @@ export const IconBrowser = (props) => {
   return <SvgIcon component={browser} {...props} viewBox="0 0 25 25" />;
 };
 
+export const IconBellRing = (props) => {
+  return <SvgIcon component={bellRing} {...props} viewBox="0 0 25 25" />;
+};
+
 export const IconCheck = (props) => {
   return <SvgIcon component={check} viewBox="0 0 512 512" {...props} />;
 };
@@ -78,7 +84,7 @@ export const IconCloseOutline = (props) => {
 };
 
 export const IconCrossInCircle = (props) => {
-  return <SvgIcon component={crossInCircle} {...props} viewBox="0 0 17 17" />;
+  return <SvgIcon component={crossInCircle} {...props} viewBox="0 0 20 20" />;
 };
 
 export const IconConnections = (props) => {
@@ -122,7 +128,7 @@ export const IconOffline = (props) => {
 };
 
 export const IconOkTick = (props) => {
-  return <SvgIcon component={okTick} {...props} viewBox="0 0 24 25" />;
+  return <SvgIcon component={okTick} {...props} viewBox="0 0 24 24" />;
 };
 
 export const IconPartySuccess = (props) => {
@@ -135,6 +141,10 @@ export const IconPlus = (props) => {
 
 export const IconRefresh = (props) => {
   return <SvgIcon component={refresh} {...props} viewBox="0 0 25 25" />;
+};
+
+export const IconReload = (props) => {
+  return <SvgIcon component={reload} {...props} viewBox="0 0 25 25" />;
 };
 
 export const IconQR = (props) => {
@@ -209,6 +219,8 @@ export const iconSelector = (icon) => {
       return IconBack;
     case 'IconBrowser':
       return IconBrowser;
+    case 'IconBellRing':
+      return IconBellRing;
     case 'IconCheck':
       return IconCheck;
     case 'IconCircles':
@@ -251,6 +263,8 @@ export const iconSelector = (icon) => {
       return IconQR;
     case 'IconQRLarge':
       return IconQRLarge;
+    case 'IconReload':
+      return IconReload;
     case 'IconScan':
       return IconScan;
     case 'IconSearch':
